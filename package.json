@@ -1,6 +1,6 @@
 {
   "name": "route-maker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Define and build URL pathes",
   "type": "module",
   "main": "route-maker.js",
@@ -14,5 +14,6 @@
     "routes"
   ],
   "author": "Roman Kushyn",
+  "repository": "https://gitlab.com/romikus/route-maker.js",
   "license": "ISC"
 }
