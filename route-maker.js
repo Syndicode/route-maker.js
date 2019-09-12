@@ -1,9 +1,20 @@
 const routeMatchRegexp = /:([^/]+)/g
 
-const createRouteFunction = (basePath, paramNames, hasParams) => (params) => {
-  if (!params) return basePath
+const mergeSettings = (outerSettings, innerSettings) => {
+  if (innerSettings) return Object.assign({}, outerSettings, innerSettings)
+  else return outerSettings
+}
 
+const prependSlash = (path, settings) => settings.prependSlash && path[0] !== '/' ? '/' + path : path
+
+const createRouteFunction = (basePath, paramNames, hasParams, outerSettings) => (params, options) => {
   let path = basePath
+  let settings = mergeSettings(outerSettings, options)
+
+  if (settings.prefix) path = prependSlash(settings.prefix, settings) + path
+
+  if (!params) return path
+
   paramNames.forEach((paramName) => {
     path = path.replace(`:${paramName}`, params[paramName])
   })
@@ -24,28 +35,29 @@ const createRouteFunction = (basePath, paramNames, hasParams) => (params) => {
   return path
 }
 
-const bindOptions = (options) => {
-  const result = (path) => {
-    let result
+const bindOptions = (outerOptions) => {
+  const result = (path, innerOptions) => {
+    let result, settings = mergeSettings(outerOptions, innerOptions)
+
     if (typeof path === 'string') {
       const paramNames = []
       const hasParams = {}
 
-      if (options.prependSlash && path[0] !== '/') path = '/' + path
+      path = prependSlash(path, settings)
 
       for (const match of path.matchAll(routeMatchRegexp)) {
         const paramName = match[1]
         paramNames.push(paramName)
         hasParams[paramName] = true
       }
-      result = createRouteFunction(path, paramNames, hasParams)
+      result = createRouteFunction(path, paramNames, hasParams, settings)
     } else result = path
 
-    if (options.assign) Object.assign(result, options.assign)
+    if (settings.assign) Object.assign(result, settings.assign)
 
     return result
   }
-  result.options = options
+  result.options = outerOptions
   result.config = extendRouteBuilder
   return result
 }
