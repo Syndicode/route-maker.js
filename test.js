@@ -1,5 +1,5 @@
-import route from './route-maker.js'
-import assert from 'assert'
+const route = require('./route-maker.js')
+const assert = require('assert')
 
 const path = '/some/:entity_type/entity/:id'
 let url = route(path)

@@ -1,8 +1,7 @@
 {
   "name": "route-maker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Define and build URL pathes",
-  "type": "module",
   "main": "route-maker.js",
   "scripts": {
     "test": "node --experimental-modules test.js"

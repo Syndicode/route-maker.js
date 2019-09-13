@@ -82,5 +82,4 @@ function extendRouteBuilder(options = {}) {
 }
 
 const route = bindOptions({prependSlash: true})
-
-export default route
+module.exports = route

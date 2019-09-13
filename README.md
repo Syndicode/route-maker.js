@@ -107,7 +107,3 @@ path === '/path'
 `prependSlash` boolean, default `true`, adds slash at the begging of path if it is absent
 
 `assign` object, will call `Object.assign` on route instances to add them provided properties
-
-## Node.js
-
-As this package uses es6 export, may be problems with using it with node.js.
