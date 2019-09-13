@@ -7,16 +7,31 @@ const mergeSettings = (outerSettings, innerSettings) => {
 
 const prependSlash = (path, settings) => settings.prependSlash && path[0] !== '/' ? '/' + path : path
 
-const createRouteFunction = (basePath, paramNames, hasParams, outerSettings) => (params, options) => {
-  let path = basePath
+const createRouteFunction = (basePath, paramNames, hasParams, outerSettings) => (...args) => {
+  let params, options, path = basePath, paramsI = args.length - 1
+
+  if (typeof args[paramsI] === 'object')
+    if (typeof args[paramsI - 1] === 'object') {
+      paramsI--
+      params = args[paramsI]
+      options = args[paramsI + 1]
+    } else {
+      params = args[paramsI]
+    }
+  else if (args.length) {
+    params = {}
+    paramsI++
+  }
+
   let settings = mergeSettings(outerSettings, options)
 
   if (settings.prefix) path = prependSlash(settings.prefix, settings) + path
 
   if (!params) return path
 
-  paramNames.forEach((paramName) => {
-    path = path.replace(`:${paramName}`, params[paramName])
+  paramNames.forEach((paramName, i) => {
+    const value = i < paramsI ? args[i] : params[paramName]
+    path = path.replace(`:${paramName}`, value)
   })
 
   let questionSign = false

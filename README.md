@@ -42,6 +42,27 @@ If param was not matched in string, it will become URI parameter:
 routes.items({search: 'phrase'}) //= '/items?search=phrase'
 ```
 
+### Positional parameters
+
+Parameters can be passed as plain arguments
+
+```javascript
+import routes from './routes'
+
+routes.item(123) === '/items/123'
+routes.item(123, {param: 'value'}) === '/items/123?param=value'
+routes.item(123, {param: 'value'}, {prefix: 'api'}) === '/api/items/123?param=value'
+```
+
+Positional parameters can be used with hash-provided parameters:
+
+```javascript
+import route from 'route-maker'
+
+const url = route('path/:one/:two')
+url(1, {two: 2}) === '/path/1/2'
+```
+
 ## Options
 
 Options can be set when creating and calling route.
