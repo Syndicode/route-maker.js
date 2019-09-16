@@ -1,6 +1,6 @@
 {
   "name": "route-maker",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Define and build URL pathes",
   "main": "route-maker.js",
   "scripts": {

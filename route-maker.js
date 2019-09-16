@@ -57,10 +57,12 @@ const bindOptions = (outerOptions) => {
     if (typeof path === 'string') {
       const paramNames = []
       const hasParams = {}
+      let match
 
       path = prependSlash(path, settings)
 
-      for (const match of path.matchAll(routeMatchRegexp)) {
+      routeMatchRegexp.lastIndex = 0
+      while ((match = routeMatchRegexp.exec(path))) {
         const paramName = match[1]
         paramNames.push(paramName)
         hasParams[paramName] = true
