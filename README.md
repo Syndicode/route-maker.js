@@ -63,7 +63,7 @@ const url = route('path/:one/:two')
 url(1, {two: 2}) === '/path/1/2'
 ```
 
-## Options
+## Options with examples
 
 Options can be set when creating and calling route.
 
@@ -94,10 +94,42 @@ import route from 'route-maker'
 
 const apiRoute = route.config({prefix: 'api'})
 let path = apiRoute('path')
-path === '/api/path'
+path() === '/api/path'
 
 let path = route('path')
-path === '/path'
+path() === '/path'
+```
+
+#### Prefix and defaults example
+
+```javascript
+import route from 'route-maker'
+
+const apiRoute = route.config({prefix: 'api/v:apiVersion', defaults: {apiVersion: 1}})
+let path = apiRoute('path')
+path === '/api/v1/path'
+
+let path = apiRoute('path')
+path({apiVersion: 2}) === '/api/v2/path'
+```
+
+Default values can be dynamically calculated:
+
+```javascript
+import route from 'route-maker'
+
+let currentUser = {}
+const userRoute = route.config({prefix: ':userType', defaults: {
+  userType: () => currentUser.type
+}})
+
+let path = userRoute('path')
+
+currentUser.type = 'customer'
+path() === '/customer/path'
+
+currentUser.type = 'admin'
+path() === '/admin/path'
 ```
 
 ### Options list
@@ -107,3 +139,5 @@ path === '/path'
 `prependSlash` boolean, default `true`, adds slash at the begging of path if it is absent
 
 `assign` object, will call `Object.assign` on route instances to add them provided properties
+
+`defaults` object, default parameters. Works with parameters in prefix. If object value is function then it will be called, result will come to url.
