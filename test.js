@@ -18,6 +18,10 @@ const extendedRoute = route.config({assign: routeProperties})
 
 assert.strictEqual(extendedRoute('path').key, 'value')
 
+// url
+assert.strictEqual(route('path', {url: 'http://example.com'})(), 'http://example.com/path')
+assert.strictEqual(route('path', {url: 'http://example.com:3000'})({3000: 'value'}), 'http://example.com:3000/path?3000=value')
+
 // prefix
 assert.strictEqual(route('path', {prefix: 'prefix'})(null), '/prefix/path')
 assert.strictEqual(route('path', {prefix: 'prefix', prependSlash: false})(null), 'prefixpath')

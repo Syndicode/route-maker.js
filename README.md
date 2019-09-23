@@ -134,7 +134,9 @@ path() === '/admin/path'
 
 ### Options list
 
-`prefix` string, adds prefix to resulting strings
+`url` string, full url if needed. Parameters inside are not allowed.
+
+`prefix` string, adds prefix to resulting strings. Parameters inside are allowed.
 
 `prependSlash` boolean, default `true`, adds slash at the begging of path if it is absent
 
