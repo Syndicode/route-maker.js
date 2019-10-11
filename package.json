@@ -1,6 +1,6 @@
 {
-  "name": "route-maker",
-  "version": "1.0.8",
+  "name": "@syndicode/route-maker",
+  "version": "1.0.9",
   "description": "Define and build URL pathes",
   "main": "route-maker.js",
   "scripts": {
@@ -13,6 +13,6 @@
     "routes"
   ],
   "author": "Roman Kushyn",
-  "repository": "https://gitlab.com/romikus/route-maker.js",
+  "repository": "https://github.com/Syndicode/route-maker",
   "license": "ISC"
 }
