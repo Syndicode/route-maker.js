@@ -3,7 +3,7 @@
 For named routes, framework agnostic - just works with strings.
 
 ## Install
-`npm install route-maker`
+`npm install @syndicode/route-maker`
 
 ## Defining routes
 ```javascript
