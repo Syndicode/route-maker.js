@@ -2,9 +2,14 @@
   "name": "@syndicode/route-maker",
   "version": "1.0.9",
   "description": "Define and build URL pathes",
-  "main": "route-maker.js",
+  "main": "bundle.js",
   "scripts": {
+    "bundle": "rollup --config rollup.config.js",
+    "prepublish": "npm run bundle",
     "test": "node --experimental-modules test.js"
+  },
+  "devDependencies": {
+    "rollup": "^1.23.1"
   },
   "keywords": [
     "pathes",
