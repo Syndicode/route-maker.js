@@ -1,4 +1,4 @@
-const route = require('./route-maker.js')
+const route = require('./bundle.js')
 const assert = require('assert')
 
 // basic behaviour
