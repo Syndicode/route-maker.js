@@ -9,7 +9,7 @@ For named routes, framework agnostic - just works with strings.
 ```javascript
 // routes.js of your project
 
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 export default {
   root: route('/'),
@@ -57,7 +57,7 @@ routes.item(123, {param: 'value'}, {prefix: 'api'}) === '/api/items/123?param=va
 Positional parameters can be used with hash-provided parameters:
 
 ```javascript
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 const url = route('path/:one/:two')
 url(1, {two: 2}) === '/path/1/2'
@@ -69,7 +69,7 @@ Options can be set when creating and calling route.
 
 Prefix example:
 ```javascript
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 let path = route('path', {prefix: 'api'})
 path() === '/api/path'
@@ -79,7 +79,7 @@ path({prefix: 'api/v2'}) === '/api/v2/path'
 Can be changed directly:
 
 ```javascript
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 route.options.prefix = 'api'
 
@@ -90,7 +90,7 @@ path() === '/api/path'
 Imported constructor can be extended with `config` method:
 
 ```javascript
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 const apiRoute = route.config({prefix: 'api'})
 let path = apiRoute('path')
@@ -103,7 +103,7 @@ path() === '/path'
 #### Prefix and defaults example
 
 ```javascript
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 const apiRoute = route.config({prefix: 'api/v:apiVersion', defaults: {apiVersion: 1}})
 let path = apiRoute('path')
@@ -116,7 +116,7 @@ path({apiVersion: 2}) === '/api/v2/path'
 Default values can be dynamically calculated:
 
 ```javascript
-import route from 'route-maker'
+import route from '@syndicode/route-maker'
 
 let currentUser = {}
 const userRoute = route.config({prefix: ':userType', defaults: {
