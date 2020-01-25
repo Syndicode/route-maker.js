@@ -1,8 +1,9 @@
 const route = require('./bundle.js')
 const assert = require('assert')
+let path
 
 // basic behaviour
-const path = '/some/:entity_type/entity/:id'
+path = '/some/:entity_type/entity/:id'
 assert.strictEqual(route(path)({entity_type: 'ice_cream', id: 123}), '/some/ice_cream/entity/123')
 assert.strictEqual(route(path)(), path)
 
@@ -46,3 +47,16 @@ assert.strictEqual(route(':a', {defaults})({}), '/1')
 const prefix = ':a'
 assert.strictEqual(route('')({}, {prefix, defaults}), '/1')
 assert.strictEqual(route('', {prefix, defaults})({}), '/1')
+
+// test match
+assert.deepEqual(route('path').match('/path'), {})
+assert.deepEqual(route('first/:a/second/:b/third').match('/path'), null)
+assert.deepEqual(
+  route('first/:a/second/:b/third').match('first/12/second/shmyak/third'),
+  {a: '12', b: 'shmyak'}
+)
+
+assert.deepEqual(
+  route('first/:a/second/:b/third').match('/first/12/second/shmyak/third?a=34&param=pampam'),
+  {a: '12', b: 'shmyak', param: 'pampam'}
+)
