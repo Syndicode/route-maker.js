@@ -1,18 +1,10 @@
-const buildParsed = (path) => {
-  const routeArray = path.slice(1).split('/')
+export default function(routePath, path) {
+  const routeArray = routePath.slice(1).split('/')
   const indexParams = {}
   routeArray.forEach((item, i) => {
     if (item[0] === ':')
       indexParams[i] = item.slice(1)
   })
-  return {routeArray, indexParams}
-}
-
-export default function(path) {
-  if (!this._match)
-    this._match = buildParsed(this.path)
-
-  const {routeArray, indexParams} = this._match
 
   if (path[0] === '/') path = path.slice(1)
 

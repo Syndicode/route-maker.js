@@ -1,6 +1,5 @@
 import {mergeSettings, prependSlash, configParams} from './utils'
 import routeFunction from './route-function'
-import match from './match'
 
 const routeBuilder = (outerOptions) => {
   const result = (path = '', innerOptions) => {
@@ -21,7 +20,6 @@ const routeBuilder = (outerOptions) => {
       result = routeFunction(path, prefixParamNames, prefixHasParams, paramNames, hasParams, settings)
     } else result = path
 
-    result.match = match
     if (settings.assign) Object.assign(result, settings.assign)
 
     return result
