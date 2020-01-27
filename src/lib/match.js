@@ -1,5 +1,6 @@
 export default function(routePath, path) {
-  const routeArray = routePath.slice(1).split('/')
+  if (routePath[0] === '/') routePath = routePath.slice(1)
+  const routeArray = routePath.split('/')
   const indexParams = {}
   routeArray.forEach((item, i) => {
     if (item[0] === ':')

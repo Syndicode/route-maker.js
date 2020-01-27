@@ -1,4 +1,5 @@
-const route = require('./bundle.js')
+const route = require('./route-maker')
+const match = require('./match')
 const assert = require('assert')
 let path
 
@@ -49,14 +50,14 @@ assert.strictEqual(route('')({}, {prefix, defaults}), '/1')
 assert.strictEqual(route('', {prefix, defaults})({}), '/1')
 
 // test match
-assert.deepEqual(route('path').match('/path'), {})
-assert.deepEqual(route('first/:a/second/:b/third').match('/path'), null)
+assert.deepEqual(match(route('path').path, '/path'), {})
+assert.deepEqual(match('first/:a/second/:b/third', '/path'), null)
 assert.deepEqual(
-  route('first/:a/second/:b/third').match('first/12/second/shmyak/third'),
+  match('first/:a/second/:b/third', 'first/12/second/shmyak/third'),
   {a: '12', b: 'shmyak'}
 )
 
 assert.deepEqual(
-  route('first/:a/second/:b/third').match('/first/12/second/shmyak/third?a=34&param=pampam'),
+  match('first/:a/second/:b/third', '/first/12/second/shmyak/third?a=34&param=pampam'),
   {a: '12', b: 'shmyak', param: 'pampam'}
 )

@@ -46,13 +46,13 @@ If param was not matched in string, it will become URI parameter:
 routes.items({search: 'phrase'}) //= '/items?search=phrase'
 ```
 
-`match` method of the route:
+`match` compares pattern and actual path, gives hash with parameters.
 ```javascript
-import route from 'route-maker'
+import match from 'route-maker/match'
 
-route('path').match('path') // {}
-route('path').match('wrongPath') // {}
-route('path/:type/path/:id/path').match('path/type_value/path/123/path') // {type: 'type_value', b: '123'}
+match('path', 'path') // {}
+match('path', 'wrongPath') // {}
+match('path/:type/path/:id/path', 'path/type_value/path/123/path') // {type: 'type_value', b: '123'}
 ```
 
 URI params are matched too, notice that `:` embedded params are stronger.
@@ -93,8 +93,7 @@ import route from 'route-maker'
 
 let path = route('path', {prefix: 'api'})
 path() === '/api/path'
-path({}, {prefix: 'api/v2'}) === '/api/v2/path'
-//   ⬆ empty params as first argument, can pass null instead
+path({}, {prefix: 'api/v2'}) === '/api/v2/path' // empty params as first argument, can pass null instead
 ```
 
 Can be changed directly:
