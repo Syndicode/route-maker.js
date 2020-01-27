@@ -62,10 +62,10 @@
         paramsI++;
       }
       var settings = mergeSettings(outerSettings, options);
-      var url = settings.url;
-      if (url) path = popSlash(url) + path;
       var prefix = settings.prefix;
       if (prefix) path = prependSlash(prefix, settings) + path;
+      var url = settings.url;
+      if (url) path = popSlash(url) + path;
       if (!params) return path;
       var prefixParamNames, prefixHasParams;
 

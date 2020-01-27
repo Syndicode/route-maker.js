@@ -19,11 +19,11 @@ const routeFunction = (basePath, outerPrefixParamNames, outerPrefixHasParams, pa
 
     let settings = mergeSettings(outerSettings, options)
 
-    const {url} = settings
-    if (url) path = popSlash(url) + path
-
     const {prefix} = settings
     if (prefix) path = prependSlash(prefix, settings) + path
+
+    const {url} = settings
+    if (url) path = popSlash(url) + path
 
     if (!params) return path
 

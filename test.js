@@ -33,6 +33,9 @@ assert.strictEqual(route('path')(null, {prefix: 'prefix', prependSlash: false}),
 const apiRoute = route.config({prefix: 'api'})
 assert.strictEqual(apiRoute('path')(), '/api/path')
 
+// url and prefix
+assert.strictEqual(route('path', {url: 'url', prefix: 'prefix'})(), 'url/prefix/path')
+
 // positional params
 assert.strictEqual(route('path/:a/:b/:c')(1, 2, 3), '/path/1/2/3')
 assert.strictEqual(route('path/:a/:b')(1, {b: 2}), '/path/1/2')
