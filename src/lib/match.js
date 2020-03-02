@@ -17,8 +17,11 @@ export default function(routePath, path) {
   }
 
   const pathArray = path.split('/')
-  const result = {}
   const {length} = routeArray
+  if (pathArray.length !== length)
+    return null
+
+  const result = {}
   for (let i = 0; i < length; i++) {
     const item = routeArray[i]
     const param = indexParams[i]

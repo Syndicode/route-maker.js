@@ -30,6 +30,8 @@ Now in router code to get original route string, react for example:
 import routes from './routes'
 
 <Route path={routes.item()} />
+// Same as:
+<Route path='/items/:id' />
 ```
 
 And for get path with *id*:
@@ -38,6 +40,8 @@ And for get path with *id*:
 import routes from './routes'
 
 <Link to={routes.item({id: 123})} />
+// Same as:
+<Link to='/items/123' />
 ```
 
 If param was not matched in string, it will become URI parameter:
@@ -51,7 +55,7 @@ routes.items({search: 'phrase'}) //= '/items?search=phrase'
 import match from 'route-maker/match'
 
 match('path', 'path') // {}
-match('path', 'wrongPath') // {}
+match('path', 'wrongPath') // null
 match('path/:type/path/:id/path', 'path/type_value/path/123/path') // {type: 'type_value', b: '123'}
 ```
 
